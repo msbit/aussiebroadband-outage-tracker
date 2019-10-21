@@ -11,7 +11,13 @@ trap 'SIGINT' do
 end
 
 def get_details(reference)
-  response = HTTParty.get("https://www.aussiebroadband.com.au/outages.php?mode=View&id=#{reference}")
+  uri = URI('https://www.aussiebroadband.com.au')
+  uri.path = '/outages.php'
+  uri.query = URI.encode_www_form(
+    mode: 'View',
+    id: reference
+  )
+  response = HTTParty.get(uri)
 
   body = JSON.parse(response.body)
 
