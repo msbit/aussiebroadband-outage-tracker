@@ -5,6 +5,11 @@ require 'bundler'
 
 Bundler.require(:default)
 
+trap 'SIGINT' do
+  puts 'Exiting'
+  exit 130
+end
+
 $email_to = ENV['EMAIL_TO']
 $reference = ENV['OUTAGE_REFERENCE']
 
