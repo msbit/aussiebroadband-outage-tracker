@@ -27,6 +27,8 @@ def get_details(reference)
   MULTIPLE_KEYS.each { |k| body[k] = body[k].split('<br/>') }
   MARKED_UP_KEYS.each { |k| body[k] = Nokogiri::HTML(body[k]).text }
 
+  body.delete('eta') if body['future']
+
   body
 end
 
