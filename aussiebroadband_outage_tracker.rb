@@ -10,8 +10,19 @@ trap 'SIGINT' do
   exit 130
 end
 
-MULTIPLE_KEYS = %w[areas].freeze
-MARKED_UP_KEYS = %w[eta prio].freeze
+DETAILS_MIDDLEWARE = []
+
+DETAILS_MIDDLEWARE.push(lambda do |details|
+  ['areas'].each { |k| details[k] = details[k].split('<br/>') }
+end)
+
+DETAILS_MIDDLEWARE.push(lambda do |details|
+  ['eta', 'prio'].each { |k| details[k] = Nokogiri::HTML(details[k]).text }
+end)
+
+DETAILS_MIDDLEWARE.push(lambda do |details|
+  details.delete('eta') if details['future']
+end)
 
 def get_details(reference)
   uri = URI('https://www.aussiebroadband.com.au')
@@ -22,14 +33,11 @@ def get_details(reference)
   )
   response = HTTParty.get(uri)
 
-  body = JSON.parse(response.body)
+  details = JSON.parse(response.body)
 
-  MULTIPLE_KEYS.each { |k| body[k] = body[k].split('<br/>') }
-  MARKED_UP_KEYS.each { |k| body[k] = Nokogiri::HTML(body[k]).text }
+  DETAILS_MIDDLEWARE.each { |m| m.call(details) }
 
-  body.delete('eta') if body['future']
-
-  body
+  details
 end
 
 puts 'Fetching initial'
