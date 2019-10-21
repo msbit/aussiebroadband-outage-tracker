@@ -10,9 +10,6 @@ trap 'SIGINT' do
   exit 130
 end
 
-$email_to = ENV['EMAIL_TO']
-$reference = ENV['OUTAGE_REFERENCE']
-
 def get_details(reference)
   response = HTTParty.get("https://www.aussiebroadband.com.au/outages.php?mode=View&id=#{reference}")
 
@@ -22,13 +19,13 @@ def get_details(reference)
 end
 
 puts 'Fetching initial'
-previous_details = get_details($reference)
+previous_details = get_details(ENV['OUTAGE_REFERENCE'])
 
 loop do
   sleep(60)
 
   puts 'Fetching current'
-  current_details = get_details($reference)
+  current_details = get_details(ENV['OUTAGE_REFERENCE'])
 
   diff = Hashdiff.diff(previous_details, current_details)
   next if diff.empty?
@@ -37,9 +34,9 @@ loop do
   pretty_current_details = JSON.pretty_generate(current_details)
 
   Pony.mail(
-    to: $email_to,
+    to: ENV['EMAIL_TO'],
     via: :sendmail,
-    subject: "Outage #{$reference} has changed",
+    subject: "Outage #{ENV['OUTAGE_REFERENCE']} has changed",
     body: "Changes:\n\n#{pretty_diff}\n\nCurrent:\n\n#{pretty_current_details}"
   )
 
