@@ -13,12 +13,14 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2019.1009)
     mini_mime (1.0.2)
-    mini_portile2 (2.4.0)
+    mini_portile2 (2.5.1)
     multi_xml (0.6.0)
-    nokogiri (1.10.8)
-      mini_portile2 (~> 2.4.0)
+    nokogiri (1.11.4)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
     pony (1.13.1)
       mail (>= 2.0)
+    racc (1.5.2)
 
 PLATFORMS
   ruby
@@ -28,7 +30,7 @@ DEPENDENCIES
   hashdiff (~> 1.0.0)
   httparty (~> 0.17.0)
   json (~> 2.3.0)
-  nokogiri (~> 1.10.0)
+  nokogiri (~> 1.11.4)
   pony (~> 1.13.0)
 
 BUNDLED WITH
