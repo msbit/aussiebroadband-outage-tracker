@@ -8,7 +8,7 @@ group :default do
   gem 'hashdiff', '~> 1.0.0'
   gem 'httparty', '~> 0.17.0'
   gem 'json', '~> 2.3.0'
-  gem 'nokogiri', '~> 1.13.9'
+  gem 'nokogiri', '~> 1.13.10'
   gem 'pony', '~> 1.13.0'
 end
 
