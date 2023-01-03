@@ -6,7 +6,7 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 group :default do
   gem 'hashdiff', '~> 1.0.0'
-  gem 'httparty', '~> 0.17.0'
+  gem 'httparty', '~> 0.21.0'
   gem 'json', '~> 2.3.0'
   gem 'nokogiri', '~> 1.13.10'
   gem 'pony', '~> 1.13.0'
