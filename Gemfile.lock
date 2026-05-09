@@ -16,7 +16,7 @@ GEM
     mini_portile2 (2.8.9)
     multi_xml (0.8.1)
       bigdecimal (>= 3.1, < 5)
-    nokogiri (1.19.1)
+    nokogiri (1.19.3)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     pony (1.13.1)
@@ -31,7 +31,7 @@ DEPENDENCIES
   hashdiff (~> 1.0.0)
   httparty (~> 0.24.0)
   json (~> 2.3.0)
-  nokogiri (~> 1.19.1)
+  nokogiri (~> 1.19.3)
   pony (~> 1.13.0)
 
 BUNDLED WITH
